@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Painel de Upload</title>
+  <link rel="stylesheet" href="../public/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="painel-body">
+  <div class="painel-container">
+    <div class="painel-header">
+      <h1 class="painel-title">Painel</h1>
+      <a href="/logout" class="logout">Sair</a>
+    </div>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+      <input type="file" name="imagem" required class="file-input" />
+      <button class="btn">Enviar</button>
+    </form>
+
+    <% if (url) { %>
+    <div class="resultado">
+      <p class="success">Imagem enviada com sucesso!</p>
+      <div class="flex items-center gap-2">
+        <input id="urlField" class="input w-full" value="<%= url %>" readonly />
+        <button onclick="copiarUrl()" class="btn">Copiar</button>
+      </div>
+      <img src="<%= url %>" alt="Imagem" class="preview" />
+    </div>
+    <% } %>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+  </div>
+
+  <div id="toast" class="hidden fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow"></div>
+
+  <script>
+    function copiarUrl() {
+      const field = document.getElementById('urlField');
+      field.select();
+      field.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      mostrarToast('Link copiado com sucesso!');
+    }
+
+    function mostrarToast(mensagem) {
+      const toast = document.getElementById('toast');
+      toast.textContent = mensagem;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+  </script>
+</body>
+</html>

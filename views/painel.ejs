@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel de Upload</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body class="dark-mode">
+  <div class="container">
+    <h1>Painel de Upload</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="form animated">
+      <label class="upload-btn">
+        Escolher imagem
+        <input type="file" name="imagem" required hidden onchange="showFileName(this)"/>
+      </label>
+      <span id="file-name"></span>
+      <button type="submit">Enviar</button>
+    </form>
+
+    <% if (url) { %>
+      <div class="result">
+        <p>Imagem enviada com sucesso:</p>
+        <input type="text" value="<%= url %>" id="image-url" readonly />
+        <button onclick="copyToClipboard()">Copiar link</button>
+      </div>
+      <div class="toast success">Upload realizado com sucesso!</div>
+    <% } %>
+
+    <% if (error) { %>
+      <div class="toast error"><%= error %></div>
+    <% } %>
+
+    <a href="/logout" class="logout">Sair</a>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>

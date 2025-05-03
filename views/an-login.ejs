@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="../public/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="login-body">
+  <form action="/login" method="POST" class="login-form">
+    <h1 class="title">Login</h1>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+    <input name="email" type="email" placeholder="Email" class="input" required />
+    <input name="senha" type="password" placeholder="Senha" class="input" required />
+    <button class="btn">Entrar</button>
+  </form>
+</body>
+</html>
